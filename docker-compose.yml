@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  mentee-app:
+    build: .
+    environment:
+      - DB_HOST
+    volumes:
+      - .:/mentee-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mentee-app.mysql
+
+  mentee-app.mysql:
+    image: mysql:8.0
+    restart: always # Go over the docs
+    command: mysqld --default-authentication-plugin=mysql_native_password --sql_mode=""
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
