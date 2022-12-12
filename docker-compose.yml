@@ -1,9 +1,11 @@
 version: "3.8"
 services:
   mentee-app:
-    build: .
+    build:
+      context: .
+      target: development
     environment:
-      - DB_HOST
+      - ENVIRONMENT
     volumes:
       - .:/mentee-app
     ports:

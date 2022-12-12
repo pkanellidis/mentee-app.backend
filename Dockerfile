@@ -1,4 +1,4 @@
-FROM ruby:3.1.0
+FROM ruby:3.1.0 as build
 
 RUN apt-get update -qq  \
     && apt-get install -y \
@@ -14,5 +14,12 @@ COPY Gemfile.lock /mentee-app/Gemfile.lock
 
 COPY . /mentee-app
 COPY docker-entrypoint-dev.sh /
+COPY docker-entrypoint-production.sh /
+
+FROM build as development
 
 ENTRYPOINT ["/./docker-entrypoint-dev.sh"]
+
+FROM build as production
+
+ENTRYPOINT ["/./docker-entrypoint-production.sh"]
