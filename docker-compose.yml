@@ -1,6 +1,9 @@
 version: "3.8"
 services:
   mentee-app:
+    build: .
+    environment:
+      - DB_HOST
     build:
       context: .
       target: development
