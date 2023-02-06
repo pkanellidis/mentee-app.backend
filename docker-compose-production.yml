@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  mentee-app:
+    build:
+      context: .
+      target: production
+    environment:
+      - ENVIRONMENT # Staging or Production coming from AWS
+      - DATABASE_URL
+    volumes:
+      - .:/mentee-app
+    ports:
+      - "3000:3000"
